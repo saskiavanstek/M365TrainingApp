@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Net.Http;
 
 namespace GitHubRepoFetcher
 {
@@ -15,28 +16,35 @@ namespace GitHubRepoFetcher
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add HttpClient service for dependency injection
-            services.AddHttpClient();
             services.AddControllers();
-            services.AddSwaggerGen();
+            services.AddHttpClient(); // Add HttpClient
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin() // Replace with your Blazor app's URL in production
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+            });
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
-                    c.RoutePrefix = "swagger"; // Set Swagger UI at the app's root (e.g., http://localhost:5000/swagger)
-                });
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
+
+            app.UseCors(); // Add CORS middleware
 
             app.UseAuthorization();
 
@@ -47,4 +55,3 @@ namespace GitHubRepoFetcher
         }
     }
 }
-// Note: Ensure you have the necessary NuGet packages installed for ASP.NET Core and HttpClient

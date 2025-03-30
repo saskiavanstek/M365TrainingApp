@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Net.Http.Headers;
 using System.Net.Http.Headers;
 
 namespace GitHubRepoFetcher.Controllers
@@ -15,20 +16,18 @@ namespace GitHubRepoFetcher.Controllers
     public class RepositoriesController : ControllerBase
     {
         private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
 
-        public RepositoriesController(HttpClient httpClient, IConfiguration configuration)
+        public RepositoriesController(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _configuration = configuration;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetRepositories()
         {
-            string githubUsername = _configuration["GitHubUsername"];
-            string url = $"http://api.github.com/users/{githubUsername}/repos";
-            string githubToken = _configuration["GitHubToken"];
+            string githubUsername = Environment.GetEnvironmentVariable("GitHubUsername");
+            string githubToken = Environment.GetEnvironmentVariable("GitHubToken");
+            string url = $"https://api.github.com/users/{githubUsername}/repos"; // Corrected URL!
 
             _httpClient.DefaultRequestHeaders.UserAgent.Clear();
             _httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("YourAppName", "1.0"));
@@ -67,8 +66,8 @@ namespace GitHubRepoFetcher.Controllers
         {
             try
             {
-                string githubUsername = _configuration["GitHubUsername"];
-                string githubToken = _configuration["GitHubToken"];
+                string githubUsername = Environment.GetEnvironmentVariable("GitHubUsername");
+                string githubToken = Environment.GetEnvironmentVariable("GitHubToken");
                 string branch = "master";
 
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
@@ -82,17 +81,17 @@ namespace GitHubRepoFetcher.Controllers
                     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("token", githubToken);
                 }
 
-                string introUrl = $"http://raw.githubusercontent.com/{githubUsername}/{repositoryId}/{branch}/intro.md";
+                string introUrl = $"https://raw.githubusercontent.com/{githubUsername}/{repositoryId}/{branch}/intro.md"; // Corrected URL!
 
                 var response = await _httpClient.GetAsync(introUrl);
                 if (!response.IsSuccessStatusCode)
                 {
-                    introUrl = $"http://raw.githubusercontent.com/{githubUsername}/{repositoryId}/{branch}/intro.txt";
+                    introUrl = $"https://raw.githubusercontent.com/{githubUsername}/{repositoryId}/{branch}/intro.txt"; // Corrected URL!
                     response = await _httpClient.GetAsync(introUrl);
 
                     if (!response.IsSuccessStatusCode)
                     {
-                        introUrl = $"http://raw.githubusercontent.com/{githubUsername}/{repositoryId}/{branch}/intro.md";
+                        introUrl = $"https://raw.githubusercontent.com/{githubUsername}/{repositoryId}/{branch}/intro.md"; // Corrected URL!
                         response = await _httpClient.GetAsync(introUrl);
 
                         if (!response.IsSuccessStatusCode)
@@ -127,8 +126,8 @@ namespace GitHubRepoFetcher.Controllers
         {
             try
             {
-                string githubUsername = _configuration["GitHubUsername"];
-                string githubToken = _configuration["GitHubToken"];
+                string githubUsername = Environment.GetEnvironmentVariable("GitHubUsername");
+                string githubToken = Environment.GetEnvironmentVariable("GitHubToken");
                 string branch = "master";
 
                 //Bepaal de branch
@@ -137,7 +136,7 @@ namespace GitHubRepoFetcher.Controllers
                     branch = "main";
                 }
 
-                string labFilesUrl = $"http://api.github.com/repos/{githubUsername}/{repositoryId}/contents/Instructions/Labs?ref={branch}";
+                string labFilesUrl = $"https://api.github.com/repos/{githubUsername}/{repositoryId}/contents/Instructions/Labs?ref={branch}"; // Corrected URL!
 
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
@@ -173,7 +172,7 @@ namespace GitHubRepoFetcher.Controllers
             public string Name { get; set; }
 
             [JsonPropertyName("html_url")]
-            public string HtmlUrl { get;set; }
+            public string HtmlUrl { get; set; }
         }
 
         public class LabFile
