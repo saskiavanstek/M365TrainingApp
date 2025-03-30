@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "jAMnO1tx2zUqpsaGr1lxHnp+TxONzYS3iXh0jx9ZDcg=",
+  "Source": "GitHubRepoFetcher",
+  "BasePath": "_content/GitHubRepoFetcher",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

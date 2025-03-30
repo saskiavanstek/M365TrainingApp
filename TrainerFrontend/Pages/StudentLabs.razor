@@ -1,0 +1,168 @@
+@page "/studentlabs/{RepositoryId}"
+@inject HttpClient Http
+@inject IConfiguration Configuration
+@inject NavigationManager NavigationManager
+
+<h1>Student Labs voor @RepositoryId</h1>
+
+@if (filesAndFolders == null && errorMessage == null)
+{
+    <p><em>Student labs laden...</em></p>
+}
+else if (!string.IsNullOrEmpty(errorMessage))
+{
+    <p class="error">@errorMessage</p>
+}
+else
+{
+    <select @onchange="OnSelectedFileChanged">
+        <option value="">Selecteer een lab...</option>
+        @foreach (var item in filesAndFolders)
+        {
+            if (item.Type == "dir")
+            {
+                <optgroup label="@item.Name">
+                    @foreach (var subItem in item.SubItems)
+                    {
+                        <option value="@subItem.Path">@subItem.Name</option>
+                    }
+                </optgroup>
+            }
+            else
+            {
+                <option value="@item.Path">@item.Name</option>
+            }
+        }
+    </select>
+
+    @if (!string.IsNullOrEmpty(selectedFilePath))
+    {
+        <div class="markdown-content">
+            @((MarkupString)markdownContent)
+        </div>
+    }
+}
+
+@code {
+    [Parameter]
+    public string RepositoryId { get; set; }
+
+    private List<GitHubContent> filesAndFolders;
+    private string errorMessage;
+    private string selectedFilePath;
+    private string markdownContent;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var githubToken = Configuration["GitHubToken"];
+
+            if (!string.IsNullOrEmpty(githubToken))
+            {
+                Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", githubToken);
+            }
+
+            filesAndFolders = await GetGitHubContent($"http://localhost:5264/api/repositories/{RepositoryId}/labfiles");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Fout bij het ophalen van lab inhoud: {ex.Message}";
+            Console.WriteLine($"Fout bij het ophalen van lab inhoud: {ex.Message}");
+        }
+    }
+
+    private async Task<List<GitHubContent>> GetGitHubContent(string apiUrl)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+        var githubToken = Configuration["GitHubToken"];
+        string branch = "master";
+        if (RepositoryId == "MS-4010-Extend-Microsoft365-Copilot-declarative-agents-VS-Code")
+        {
+            branch = "main";
+        }
+
+        if (!string.IsNullOrEmpty(githubToken))
+        {
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", githubToken);
+        }
+
+        request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+
+        //Add User-Agent
+        request.Headers.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("YourAppName", "1.0"));
+
+        //Log headers
+        Console.WriteLine($"Request Headers: {request.Headers}");
+
+        var response = await Http.SendAsync(request);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            errorMessage = $"Fout bij het ophalen van lab inhoud: {response.StatusCode} ({response.ReasonPhrase})";
+            Console.WriteLine($"Fout bij het ophalen van lab inhoud: {response.StatusCode} ({response.ReasonPhrase})");
+            return new List<GitHubContent>(); // Return empty list to prevent further errors
+        }
+
+        var responseContent = await response.Content.ReadFromJsonAsync<List<GitHubContent>>();
+        var result = new List<GitHubContent>();
+
+        if (responseContent != null)
+        {
+            foreach (var item in responseContent)
+            {
+                if (item.Type == "dir")
+                {
+                    var subItems = await GetGitHubContent(item.Url.Replace("master", branch)); // Vervang de branch in de URL
+                    result.Add(new GitHubContent { Name = item.Name, Type = item.Type, SubItems = subItems, Url = item.Url });
+                }
+                else if (item.Name.EndsWith(".md"))
+                {
+                    result.Add(new GitHubContent { Name = item.Name.Replace(".md", ""), Path = item.Path, Type = item.Type });
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private async Task OnSelectedFileChanged(ChangeEventArgs e)
+    {
+        selectedFilePath = e.Value.ToString();
+        markdownContent = null;
+
+        if (!string.IsNullOrEmpty(selectedFilePath))
+        {
+            try
+            {
+                string branch = "master";
+                if (RepositoryId == "MS-4010-Extend-Microsoft365-Copilot-declarative-agents-VS-Code")
+                {
+                    branch = "main";
+                }
+                // Correcte repository-ID en pad
+                var markdownApiUrl = $"http://raw.githubusercontent.com/IT-M365-Training/{RepositoryId}/{branch}/{selectedFilePath}";
+
+                //Log URL
+                Console.WriteLine($"Markdown API URL: {markdownApiUrl}");
+
+                var markdownText = await Http.GetStringAsync(markdownApiUrl);
+                markdownContent = Markdig.Markdown.ToHtml(markdownText);
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"Fout bij het ophalen van markdown bestand: {ex.Message}";
+                Console.WriteLine($"Fout bij het ophalen van markdown bestand: {ex.Message}");
+            }
+        }
+    }
+
+    public class GitHubContent
+    {
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public string Type { get; set; }
+        public List<GitHubContent> SubItems { get; set; }
+        public string Url { get; set; }
+    }
+}
