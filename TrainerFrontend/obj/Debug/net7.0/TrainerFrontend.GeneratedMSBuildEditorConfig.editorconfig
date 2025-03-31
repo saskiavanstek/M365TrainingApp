@@ -9,59 +9,59 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TrainerFrontend
 build_property.RootNamespace = TrainerFrontend
-build_property.ProjectDir = C:\Users\s.vanstek\OneDrive - PowerPups\Coding\DotNetCore\TrainerFrontend\
+build_property.ProjectDir = C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\s.vanstek\OneDrive - PowerPups\Coding\DotNetCore\TrainerFrontend
+build_property.MSBuildProjectDirectory = C:\M365TrainingApp\M365TrainingApp\TrainerFrontend
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/App.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Pages/Counter.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Pages/FetchData.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Pages/Index.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Pages/StudentLabs.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Pages/StudentLabs.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudExhYnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Pages/Trainer.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Pages/Trainer.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVHJhaW5lci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Shared/SurveyPrompt.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/_Imports.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Shared/MainLayout.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-e0nav9pvhh
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Shared/NavMenu.razor]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-dwwqd5toff
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Pages/Error.cshtml]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/s.vanstek/OneDrive - PowerPups/Coding/DotNetCore/TrainerFrontend/Pages/_Host.cshtml]
+[C:/M365TrainingApp/M365TrainingApp/TrainerFrontend/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

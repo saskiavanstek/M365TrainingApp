@@ -963,11 +963,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\GitHubRepoFetcher\\GitHubRepoFetcher.csproj",
+      "projectUniqueName": "C:\\M365TrainingApp\\M365TrainingApp\\GitHubRepoFetcher\\GitHubRepoFetcher.csproj",
       "projectName": "GitHubRepoFetcher",
-      "projectPath": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\GitHubRepoFetcher\\GitHubRepoFetcher.csproj",
+      "projectPath": "C:\\M365TrainingApp\\M365TrainingApp\\GitHubRepoFetcher\\GitHubRepoFetcher.csproj",
       "packagesPath": "C:\\Users\\s.vanstek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\GitHubRepoFetcher\\obj\\",
+      "outputPath": "C:\\M365TrainingApp\\M365TrainingApp\\GitHubRepoFetcher\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\s.vanstek\\AppData\\Roaming\\NuGet\\NuGet.Config"

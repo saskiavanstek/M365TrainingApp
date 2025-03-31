@@ -56,14 +56,10 @@ else
     {
         try
         {
-            var githubToken = Configuration["GitHubToken"];
+            var functionApiKey = Configuration["functionApiKey"]; // Haal de function key op uit appsettings.json
+            var apiUrl = $"https://m365labfunctions.azurewebsites.net/api/repositories/{RepositoryId}/labfiles?code={functionApiKey}"; // Gebruik de juiste URL met function key
 
-            if (!string.IsNullOrEmpty(githubToken))
-            {
-                Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", githubToken);
-            }
-
-            filesAndFolders = await GetGitHubContent($"http://localhost:5264/api/repositories/{RepositoryId}/labfiles");
+            filesAndFolders = await GetGitHubContent(apiUrl);
         }
         catch (Exception ex)
         {

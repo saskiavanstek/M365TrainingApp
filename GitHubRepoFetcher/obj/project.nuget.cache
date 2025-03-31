@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VqdyFup65ig=",
+  "dgSpecHash": "7FEjtRP5xTs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\GitHubRepoFetcher\\GitHubRepoFetcher.csproj",
+  "projectFilePath": "C:\\M365TrainingApp\\M365TrainingApp\\GitHubRepoFetcher\\GitHubRepoFetcher.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\s.vanstek\\.nuget\\packages\\microsoft.aspnetcore.http\\2.3.0\\microsoft.aspnetcore.http.2.3.0.nupkg.sha512",
     "C:\\Users\\s.vanstek\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.0\\microsoft.aspnetcore.http.abstractions.2.3.0.nupkg.sha512",

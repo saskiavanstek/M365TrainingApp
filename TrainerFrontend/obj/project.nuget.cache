@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OAc/ts8GP+g=",
+  "dgSpecHash": "EiJ7UpgmCs8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\TrainerFrontend.csproj",
+  "projectFilePath": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\TrainerFrontend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\s.vanstek\\.nuget\\packages\\bootstrap\\5.3.0\\bootstrap.5.3.0.nupkg.sha512",
     "C:\\Users\\s.vanstek\\.nuget\\packages\\markdig\\0.24.0\\markdig.0.24.0.nupkg.sha512"

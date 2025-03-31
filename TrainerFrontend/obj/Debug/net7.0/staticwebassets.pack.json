@@ -1,6 +1,70 @@
 {
   "Files": [
     {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\TrainerFrontend.bundle.scp.css",
+      "PackagePath": "staticwebassets\\TrainerFrontend.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\README.md",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
       "Id": "C:\\Users\\s.vanstek\\.nuget\\packages\\bootstrap\\5.3.0\\contentFiles\\any\\any\\wwwroot\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\css\\bootstrap-grid.css"
     },
@@ -175,70 +239,6 @@
     {
       "Id": "C:\\Users\\s.vanstek\\.nuget\\packages\\bootstrap\\5.3.0\\contentFiles\\any\\any\\wwwroot\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js.map"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\TrainerFrontend.bundle.scp.css",
-      "PackagePath": "staticwebassets\\TrainerFrontend.bundle.scp.css"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\app.css",
-      "PackagePath": "staticwebassets\\app.css"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
-      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
-      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
-      "PackagePath": "staticwebassets\\css\\open-iconic"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
-      "PackagePath": "staticwebassets\\css\\open-iconic"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\README.md",
-      "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
-      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
-      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
-      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
-      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
-      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
-      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\favicon.png",
-      "PackagePath": "staticwebassets\\favicon.png"
-    },
-    {
-      "Id": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
       "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.TrainerFrontend.Microsoft.AspNetCore.StaticWebAssets.props",

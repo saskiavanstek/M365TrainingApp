@@ -48,27 +48,27 @@ else
     private string selectedRepositoryId;
     private string labContent;
     private string errorMessage;
-    private string githubUsername;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            var githubToken = Configuration["GitHubToken"];
-            githubUsername = Configuration["GitHubUsername"];
-
-            if (!string.IsNullOrEmpty(githubToken))
-            {
-                Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", githubToken);
-            }
-
-            repositories = await Http.GetFromJsonAsync<List<Repository>>("http://localhost:5264/api/repositories");
+            repositories = await GetRepositories();
         }
         catch (Exception ex)
         {
             errorMessage = $"Fout bij het ophalen van repositories: {ex.Message}";
             Console.WriteLine($"Error fetching repositories: {ex.Message}");
         }
+    }
+
+    private async Task<List<Repository>> GetRepositories()
+    {
+        var functionKey = Configuration["FunctionKey"]; // Haal de Function key op uit appsettings.json
+        var functionApiKey = Configuration["FunctionApiKey"]; // haal de api key op uit appsettings.json
+        var url = $"https://m365labfunctions.azurewebsites.net/api/repositories?code={functionApiKey}"; // voeg de key als queryparameter toe.
+        var repositories = await Http.GetFromJsonAsync<List<Repository>>(url);
+        return repositories;
     }
 
     private async Task OnSelectedRepositoryChanged(ChangeEventArgs e)
@@ -79,22 +79,7 @@ else
 
         try
         {
-            var githubToken = Configuration["GitHubToken"];
-
-            if (!string.IsNullOrEmpty(githubToken))
-            {
-                Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", githubToken);
-            }
-
-            // Hardcoded branch voor specifieke repository
-            string branch = "master";
-            if (selectedRepositoryId == "MS-4010-Extend-Microsoft365-Copilot-declarative-agents-VS-Code")
-            {
-                branch = "main";
-            }
-
-            // Correcte URL met de juiste branch
-            labContent = await Http.GetStringAsync($"http://localhost:5264/api/repositories/{selectedRepositoryId}/content?ref={branch}");
+            labContent = await GetLabContent();
             labContent = Markdig.Markdown.ToHtml(labContent);
         }
         catch (Exception ex)
@@ -105,54 +90,13 @@ else
         StateHasChanged();
     }
 
-    private async Task<string> GetDefaultBranch(string repositoryId)
+    private async Task<string> GetLabContent()
     {
-        try
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.github.com/repos/{githubUsername}/{repositoryId}");
-            var githubToken = Configuration["GitHubToken"];
-
-            if (!string.IsNullOrEmpty(githubToken))
-            {
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", githubToken);
-            }
-
-            request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-
-            var response = await Http.SendAsync(request);
-
-            // Log rate-limit headers
-            if (response.Headers.TryGetValues("X-RateLimit-Limit", out var limitValues))
-            {
-                Console.WriteLine($"Rate Limit: {limitValues.FirstOrDefault()}");
-            }
-            if (response.Headers.TryGetValues("X-RateLimit-Remaining", out var remainingValues))
-            {
-                Console.WriteLine($"Rate Limit Remaining: {remainingValues.FirstOrDefault()}");
-            }
-            if (response.Headers.TryGetValues("X-RateLimit-Reset", out var resetValues))
-            {
-                if (long.TryParse(resetValues.FirstOrDefault(), out var resetTimestamp))
-                {
-                    var resetDateTime = DateTimeOffset.FromUnixTimeSeconds(resetTimestamp).LocalDateTime;
-                    Console.WriteLine($"Rate Limit Reset: {resetDateTime}");
-                }
-            }
-
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"Fout bij het ophalen van de standaard branch: {response.StatusCode} ({response.ReasonPhrase})");
-                return "master"; // Fallback naar "master" bij een fout
-            }
-
-            var gitHubRepository = await response.Content.ReadFromJsonAsync<GitHubRepository>();
-            return gitHubRepository?.DefaultBranch ?? "master"; // Fallback naar "master" als de API-aanroep mislukt
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Fout bij het ophalen van de standaard branch: {ex.Message}");
-            return "master"; // Fallback naar "master" bij een fout
-        }
+        var functionKey = Configuration["FunctionKey"];// Haal de Function key op uit appsettings.json
+        var functionApiKey = Configuration["FunctionApiKey"]; // haal de api key op uit appsettings.json
+        var url = $"https://m365labfunctions.azurewebsites.net/api/repositories/{selectedRepositoryId}/content?code={functionApiKey}";// voeg de key als queryparameter toe.
+        var labContent = await Http.GetStringAsync(url);
+        return labContent;
     }
 
     private void GenerateStudentLabs()
@@ -167,10 +111,5 @@ else
     {
         public string Id { get; set; }
         public string Name { get; set; }
-    }
-
-    public class GitHubRepository
-    {
-        public string DefaultBranch { get; set; }
     }
 }

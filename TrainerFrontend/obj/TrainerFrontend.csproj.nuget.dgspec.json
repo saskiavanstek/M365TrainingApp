@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\TrainerFrontend.csproj": {}
+    "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\TrainerFrontend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\TrainerFrontend.csproj": {
+    "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\TrainerFrontend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\TrainerFrontend.csproj",
+        "projectUniqueName": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\TrainerFrontend.csproj",
         "projectName": "TrainerFrontend",
-        "projectPath": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\TrainerFrontend.csproj",
+        "projectPath": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\TrainerFrontend.csproj",
         "packagesPath": "C:\\Users\\s.vanstek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s.vanstek\\OneDrive - PowerPups\\Coding\\DotNetCore\\TrainerFrontend\\obj\\",
+        "outputPath": "C:\\M365TrainingApp\\M365TrainingApp\\TrainerFrontend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\s.vanstek\\AppData\\Roaming\\NuGet\\NuGet.Config"
