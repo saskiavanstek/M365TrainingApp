@@ -1,17 +1,32 @@
-@page "/studentlabs/{RepositoryId}"
+@page "/studentlabs/{UniqueId}/{RepositoryId}"
 @inject HttpClient Http
 @inject IConfiguration Configuration
 @inject NavigationManager NavigationManager
+@inject AppDbContext DbContext
+@using Microsoft.EntityFrameworkCore
+
+@if (expirationDate.HasValue)
+{
+    <p>Lab geldig tot: @expirationDate.Value.ToString("dd-MM-yyyy HH:mm")</p>
+}
 
 <h1>Student Labs voor @RepositoryId</h1>
 
-@if (filesAndFolders == null && errorMessage == null)
-{
-    <p><em>Student labs laden...</em></p>
-}
-else if (!string.IsNullOrEmpty(errorMessage))
+<div style="@(IsStudent ? "display: none;" : "")">
+    <div class="sidebar">
+        <NavLink href="/trainer">
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Trainer
+        </NavLink>
+    </div>
+</div>
+
+@if (errorMessage != null)
 {
     <p class="error">@errorMessage</p>
+}
+else if (filesAndFolders == null)
+{
+    <p><em>Student labs laden...</em></p>
 }
 else
 {
@@ -45,27 +60,56 @@ else
 
 @code {
     [Parameter]
+    public string UniqueId { get; set; }
+    [Parameter]
     public string RepositoryId { get; set; }
+
+    [Parameter]
+    public bool IsStudent { get; set; } = true;
 
     private List<GitHubContent> filesAndFolders;
     private string errorMessage;
     private string selectedFilePath;
     private string markdownContent;
+    private DateTime? expirationDate;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            var functionApiKey = Configuration["functionApiKey"]; // Haal de function key op uit appsettings.json
-            var apiUrl = $"https://m365labfunctions.azurewebsites.net/api/repositories/{RepositoryId}/labfiles?code={functionApiKey}"; // Gebruik de juiste URL met function key
-
-            filesAndFolders = await GetGitHubContent(apiUrl);
+            if (await ValidateUniqueId())
+            {
+                var functionApiKey = Configuration["functionApiKey"];
+                var apiUrl = $"https://m365labfunctions.azurewebsites.net/api/repositories/{RepositoryId}/labfiles?code={functionApiKey}";
+                filesAndFolders = await GetGitHubContent(apiUrl);
+            }
         }
         catch (Exception ex)
         {
             errorMessage = $"Fout bij het ophalen van lab inhoud: {ex.Message}";
             Console.WriteLine($"Fout bij het ophalen van lab inhoud: {ex.Message}");
         }
+    }
+
+    private async Task<bool> ValidateUniqueId()
+    {
+        var generatedLink = await DbContext.GeneratedLinks
+            .FirstOrDefaultAsync(gl => gl.UniqueId == UniqueId && gl.RepositoryId == RepositoryId);
+
+        if (generatedLink == null)
+        {
+            errorMessage = "Ongeldige link.";
+            return false;
+        }
+
+        if (generatedLink.ExpirationDate < DateTime.Now)
+        {
+            errorMessage = "Link is verlopen.";
+            return false;
+        }
+
+        expirationDate = generatedLink.ExpirationDate;
+        return true;
     }
 
     private async Task<List<GitHubContent>> GetGitHubContent(string apiUrl)
@@ -85,10 +129,8 @@ else
 
         request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
 
-        //Add User-Agent
         request.Headers.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("YourAppName", "1.0"));
 
-        //Log headers
         Console.WriteLine($"Request Headers: {request.Headers}");
 
         var response = await Http.SendAsync(request);
@@ -97,19 +139,23 @@ else
         {
             errorMessage = $"Fout bij het ophalen van lab inhoud: {response.StatusCode} ({response.ReasonPhrase})";
             Console.WriteLine($"Fout bij het ophalen van lab inhoud: {response.StatusCode} ({response.ReasonPhrase})");
-            return new List<GitHubContent>(); // Return empty list to prevent further errors
+            return new List<GitHubContent>();
         }
 
-        var responseContent = await response.Content.ReadFromJsonAsync<List<GitHubContent>>();
+        var responseContent = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"API Response: {responseContent}");
+
+        var responseData = System.Text.Json.JsonSerializer.Deserialize<List<GitHubContent>>(responseContent, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
         var result = new List<GitHubContent>();
 
-        if (responseContent != null)
+        if (responseData != null)
         {
-            foreach (var item in responseContent)
+            foreach (var item in responseData)
             {
                 if (item.Type == "dir")
                 {
-                    var subItems = await GetGitHubContent(item.Url.Replace("master", branch)); // Vervang de branch in de URL
+                    var subItems = await GetGitHubContent(item.Url.Replace("master", branch));
                     result.Add(new GitHubContent { Name = item.Name, Type = item.Type, SubItems = subItems, Url = item.Url });
                 }
                 else if (item.Name.EndsWith(".md"))
@@ -136,10 +182,9 @@ else
                 {
                     branch = "main";
                 }
-                // Correcte repository-ID en pad
+
                 var markdownApiUrl = $"http://raw.githubusercontent.com/IT-M365-Training/{RepositoryId}/{branch}/{selectedFilePath}";
 
-                //Log URL
                 Console.WriteLine($"Markdown API URL: {markdownApiUrl}");
 
                 var markdownText = await Http.GetStringAsync(markdownApiUrl);

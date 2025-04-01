@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "TrainerFrontend/1.0.0": {
+        "dependencies": {
+          "bootstrap": "5.3.0",
+          "Markdig": "0.24.0"
+        },
+        "runtime": {
+          "TrainerFrontend.dll": {}
+        }
+      },
+      "bootstrap/5.3.0": {},
+      "Markdig/0.24.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/Markdig.dll": {
+            "assemblyVersion": "0.24.0.0",
+            "fileVersion": "0.24.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TrainerFrontend/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "bootstrap/5.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Glct0CeNsN5ETcAmV4IsIGa8VEvnWphT4Wb+IaF7/4KAMaZjxpr0eZ8Uf6H/gWKPcUB2p235/3alyhmYBbU6FQ==",
+      "path": "bootstrap/5.3.0",
+      "hashPath": "bootstrap.5.3.0.nupkg.sha512"
+    },
+    "Markdig/0.24.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xvoxO3Ck4mNflc+62d5LCI8xCVmj+SEdpGPptUZmPtbqK88iZkSxtprJWUadHNt8tXY6rFx8oHGpEw1Qcu3lAw==",
+      "path": "markdig/0.24.0",
+      "hashPath": "markdig.0.24.0.nupkg.sha512"
+    }
+  }
+}

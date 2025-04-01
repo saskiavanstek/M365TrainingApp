@@ -1,0 +1,34 @@
+@page "/generatedlinks"
+@inject NavigationManager NavigationManager
+
+<h1>Gegenereerde Links voor Studenten</h1>
+
+@if (Links != null)
+{
+    <ul>
+        @foreach (var link in Links)
+        {
+            <li><a href="@link">@link</a></li>
+        }
+    </ul>
+}
+else
+{
+    <p>Er zijn geen links gegenereerd.</p>
+}
+
+@code {
+    private List<string> Links = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        var linkValues = query.GetValues("link");
+
+        if (linkValues != null)
+        {
+            Links = linkValues.ToList();
+        }
+    }
+}

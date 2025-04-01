@@ -2,8 +2,13 @@
 @inject HttpClient Http
 @inject IConfiguration Configuration
 @inject NavigationManager NavigationManager
+@inject AppDbContext DbContext
 
 <h1>Trainer Dashboard</h1>
+
+<input type="date" @bind="trainingStartDate" />
+<input type="number" @bind="linkValidityDays" placeholder="Geldigheid (dagen)" />
+<input type="number" @bind="numberOfParticipants" placeholder="Aantal deelnemers" />
 
 @if (repositories == null)
 {
@@ -48,6 +53,11 @@ else
     private string selectedRepositoryId;
     private string labContent;
     private string errorMessage;
+    private List<string> generatedLinks = new List<string>();
+    private HashSet<int> generatedIds = new HashSet<int>();
+    private DateTime trainingStartDate = DateTime.Now;
+    private int linkValidityDays = 1;
+    private int numberOfParticipants = 5;
 
     protected override async Task OnInitializedAsync()
     {
@@ -64,9 +74,9 @@ else
 
     private async Task<List<Repository>> GetRepositories()
     {
-        var functionKey = Configuration["FunctionKey"]; // Haal de Function key op uit appsettings.json
-        var functionApiKey = Configuration["FunctionApiKey"]; // haal de api key op uit appsettings.json
-        var url = $"https://m365labfunctions.azurewebsites.net/api/repositories?code={functionApiKey}"; // voeg de key als queryparameter toe.
+        var functionKey = Configuration["FunctionKey"];
+        var functionApiKey = Configuration["FunctionApiKey"];
+        var url = $"https://m365labfunctions.azurewebsites.net/api/repositories?code={functionApiKey}";
         var repositories = await Http.GetFromJsonAsync<List<Repository>>(url);
         return repositories;
     }
@@ -92,9 +102,9 @@ else
 
     private async Task<string> GetLabContent()
     {
-        var functionKey = Configuration["FunctionKey"];// Haal de Function key op uit appsettings.json
-        var functionApiKey = Configuration["FunctionApiKey"]; // haal de api key op uit appsettings.json
-        var url = $"https://m365labfunctions.azurewebsites.net/api/repositories/{selectedRepositoryId}/content?code={functionApiKey}";// voeg de key als queryparameter toe.
+        var functionKey = Configuration["FunctionKey"];
+        var functionApiKey = Configuration["FunctionApiKey"];
+        var url = $"https://m365labfunctions.azurewebsites.net/api/repositories/{selectedRepositoryId}/content?code={functionApiKey}";
         var labContent = await Http.GetStringAsync(url);
         return labContent;
     }
@@ -103,7 +113,35 @@ else
     {
         if (!string.IsNullOrEmpty(selectedRepositoryId))
         {
-            NavigationManager.NavigateTo($"/studentlabs/{selectedRepositoryId}");
+            generatedLinks.Clear();
+            generatedIds.Clear();
+
+            for (int i = 0; i < numberOfParticipants; i++)
+            {
+                int uniqueId;
+                do
+                {
+                    uniqueId = new Random().Next(100000, 999999);
+                } while (generatedIds.Contains(uniqueId));
+                generatedIds.Add(uniqueId);
+
+                var generatedLink = new GeneratedLink
+                {
+                    UniqueId = uniqueId.ToString(),
+                    RepositoryId = selectedRepositoryId,
+                    ExpirationDate = trainingStartDate.AddDays(linkValidityDays)
+                };
+
+                DbContext.GeneratedLinks.Add(generatedLink);
+                DbContext.SaveChanges();
+
+                generatedLinks.Add($"/studentlabs/{uniqueId}/{selectedRepositoryId}?IsStudent=true");
+            }
+
+            var linksQuery = string.Join("&link=", generatedLinks);
+            var navigationUrl = $"/generatedlinks?link={linksQuery}";
+
+            NavigationManager.NavigateTo(navigationUrl);
         }
     }
 

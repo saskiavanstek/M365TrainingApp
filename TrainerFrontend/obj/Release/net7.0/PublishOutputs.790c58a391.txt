@@ -1,0 +1,8 @@
+C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\bin\Release\net7.0\publish\TrainerFrontend.exe
+C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\bin\Release\net7.0\publish\appsettings.Development.json
+C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\bin\Release\net7.0\publish\appsettings.json
+C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\bin\Release\net7.0\publish\TrainerFrontend.dll
+C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\bin\Release\net7.0\publish\TrainerFrontend.deps.json
+C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\bin\Release\net7.0\publish\TrainerFrontend.runtimeconfig.json
+C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\bin\Release\net7.0\publish\TrainerFrontend.pdb
+C:\M365TrainingApp\M365TrainingApp\TrainerFrontend\bin\Release\net7.0\publish\Markdig.dll
