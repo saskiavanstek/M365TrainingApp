@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GitHubRepoFetcher")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+827c8ecb99da5cbda29f0dddfb4d0ea19ac8baac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5aef6e4033679378fa3dd0de0f390bbac60f7bfc")]
 [assembly: System.Reflection.AssemblyProductAttribute("GitHubRepoFetcher")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GitHubRepoFetcher")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
